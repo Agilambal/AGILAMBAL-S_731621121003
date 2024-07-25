@@ -9,20 +9,20 @@
       document.getElementById('output').innerHTML = '<p>Button clicked!</p>';
     }
 
-    function handleMouseOver() {
+    function MouseOver() {
       document.getElementById('output').innerHTML = '<p>Mouse over event occurred!</p>';
     }
 
-    function handleMouseOut() {
+    function MouseOut() {
       document.getElementById('output').innerHTML = '<p>Mouse out event occurred!</p>';
     }
 
-    function handleChange(event) {
+    function Change(event) {
       const selectedOption = event.target.value;
       document.getElementById('output').innerHTML = '<p>Selected option:' + selectedOption+'</p>';
     }
 
-    function handleKeyUp(event) {
+    function KeyUp(event) {
       const enteredText = event.target.value;
       document.getElementById('output').innerHTML = '<p> Entered text:' + enteredText + '</p>';
     }
@@ -33,17 +33,17 @@
   
   <div>
     
-    Enter Text: <input type="text" id="inputText" onkeyup="handleKeyUp(event)">
+    Enter Text: <input type="text" id="inputText" onkeyup="KeyUp(event)">
   </div>
 
   <button onclick="handleClick()">Click Me</button>
 
-  <div id="mouseoverDiv" onmouseover="handleMouseOver()">Mouse over me</div>
-  <div id="mouseoutDiv" onmouseout="handleMouseOut()">Mouse out of me</div>
-
+  <div id="mouseoverDiv" onmouseover="MouseOver()">Mouse over me</div>
+  <div id="mouseoutDiv" onmouseout="MouseOut()">Mouse out of me</div>
+  
   <div>
     <label for="changeInput">Select an option:</label>
-    <select id="changeInput" onchange="handleChange(event)">
+    <select id="changeInput" onchange="Change(event)">
       <option value="option1">Option 1</option>
       <option value="option2">Option 2</option>
       <option value="option3">Option 3</option>
