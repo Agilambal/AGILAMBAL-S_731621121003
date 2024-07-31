@@ -21,7 +21,7 @@ export class AppComponent {
 //   }
 //   change(){
 //     this.name="vijay";
-//   }
+//   }ng
 //   changeImage(){
 //     this.imagePath="./assets/Ang1.png";
 //   }
