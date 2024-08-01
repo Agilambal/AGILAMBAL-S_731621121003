@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalculatorService } from './calculator.service';
 
 @Component({
   selector: 'app-root',
@@ -28,28 +29,36 @@ export class AppComponent {
 // }
 
 
-  flag:boolean;
-  vehicles:string[];
-  selectedVehicle:string;
-  myStyle:{};
-  myClass:string;
+  // flag:boolean;
+  // vehicles:string[];
+  // selectedVehicle:string;
+  // myStyle:{};
+  // myClass:string;
 
-  constructor(){
-    this.flag=true;
-    this.vehicles=["Two Wheeler","Three Wheeler","Four Wheeler"];
-    this.selectedVehicle="";
-    this.myStyle={'width':'40%','border':'2px solid green','border-radius':'15px'};
-    this.myClass="myClass1";
-  }
-  changeFlag(){
-    this.flag=!this.flag;
+  // constructor(){
+  //   this.flag=true;
+  //   this.vehicles=["Two Wheeler","Three Wheeler","Four Wheeler"];
+  //   this.selectedVehicle="";
+  //   this.myStyle={'width':'40%','border':'2px solid green','border-radius':'15px'};
+  //   this.myClass="myClass1";
+  // }
+  // changeFlag(){
+  //   this.flag=!this.flag;
     
-  }
-  setSelectedItem(vec:string){
-    this.selectedVehicle=vec;
-  }
-  changeStyle(){
-    this.myStyle={'width':'40%','border':'2px solid red','border-radius':'15px'};
+  // }
+  // setSelectedItem(vec:string){
+  //   this.selectedVehicle=vec;
+  // }
+  // changeStyle(){
+  //   this.myStyle={'width':'40%','border':'2px solid red','border-radius':'15px'};
   
+  // }
+  //}
+
+
+  sum:number;
+  constructor(private calc :CalculatorService){
+    this.sum=calc.getAddition(10,20);
   }
-  }
+
+}
