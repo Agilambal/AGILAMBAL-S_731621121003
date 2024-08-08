@@ -1,0 +1,430 @@
+
+1)
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 8 13:58:37 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> create table tbl_practice(pid number(5),pname varchar(10),psalary number(10),pdno number(5));
+SP2-0640: Not connected
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table tbl_practice(pid number(5),pname varchar(10),psalary number(10),pdno number(5));
+
+Table created.
+
+SQL> insert into tbl_practice(003,'Agi',1000,10);
+insert into tbl_practice(003,'Agi',1000,10)
+                         *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into tbl_practice values (003,'Agi',1000,10);
+
+1 row created.
+
+SQL> insert into tbl_practice values (004,'Mowni',2000,20);
+
+1 row created.
+
+SQL> insert into tbl_practice values (005,'Vasuki',3000,30);
+
+1 row created.
+
+SQL> insert into tbl_practice values (006,'Vaish',4000,40);
+
+1 row created.
+
+SQL> insert into tbl_practice values (007,'Dhivya',5000,50);
+
+1 row created.
+
+SQL> insert into tbl_practice values (007,5000,50);
+insert into tbl_practice values (007,5000,50)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into tbl_practice values (007,' ',5000,50);
+
+1 row created.
+
+SQL> selecct * from tbl_practice;
+SP2-0734: unknown command beginning "selecct * ..." - rest of line ignored.
+SQL> select * from tbl_practice;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         20
+         5 Vasuki           3000         30
+         6 Vaish            4000         40
+         7 Dhivya           5000         50
+         7                  5000         50
+
+6 rows selected.
+
+SQL> update tbl_practice set pdno=10 where pdno=20;
+
+1 row updated.
+
+SQL> update tbl_practice set pdno=20 where pdno=30;
+
+1 row updated.
+
+SQL> update tbl_practice set pdno=20 where pdno=40;
+
+1 row updated.
+
+SQL> update tbl_practice set pdno=30 where pdno=50;
+
+2 rows updated.
+
+SQL> update tbl_practice set pdno=30 where pdno=60;
+
+0 rows updated.
+
+SQL> select * from tbl_practice;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         10
+         5 Vasuki           3000         20
+         6 Vaish            4000         20
+         7 Dhivya           5000         30
+         7                  5000         30
+
+6 rows selected.
+
+SQL> select pdno,count(*) from tbl_practice group by dno;
+select pdno,count(*) from tbl_practice group by dno
+                                                *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier
+
+
+SQL> select pdno,count(*) from tbl_practice group by pdno;
+
+      PDNO   COUNT(*)
+---------- ----------
+        30          2
+        20          2
+        10          2
+
+SQL> select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno;
+
+      PDNO   COUNT(*) SUM(PSALARY) AVG(PSALARY) MIN(PSALARY) MAX(PSALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        30          2        10000         5000         5000         5000
+        20          2         7000         3500         3000         4000
+        10          2         3000         1500         1000         2000
+
+SQL> select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno order by dno;
+select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno order by dno
+                                                                                                                  *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier
+
+
+SQL> select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno order by pdno;
+
+      PDNO   COUNT(*) SUM(PSALARY) AVG(PSALARY) MIN(PSALARY) MAX(PSALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        10          2         3000         1500         1000         2000
+        20          2         7000         3500         3000         4000
+        30          2        10000         5000         5000         5000
+
+SQL> select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno having min(psalary) > 3000order by pdno;
+
+      PDNO   COUNT(*) SUM(PSALARY) AVG(PSALARY) MIN(PSALARY) MAX(PSALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        30          2        10000         5000         5000         5000
+
+SQL> select pdno,count(*),sum(psalary),avg(psalary),min(psalary),max(psalary) from tbl_practice group by pdno having min(psalary) < 3000order by pdno;
+
+      PDNO   COUNT(*) SUM(PSALARY) AVG(PSALARY) MIN(PSALARY) MAX(PSALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        10          2         3000         1500         1000         2000
+
+SQL>  select * from tbl_practice;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         10
+         5 Vasuki           3000         20
+         6 Vaish            4000         20
+         7 Dhivya           5000         30
+         7                  5000         30
+
+6 rows selected.
+
+SQL> create view myview as select * from tbl_practice where dno=10;
+create view myview as select * from tbl_practice where dno=10
+                                                       *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier
+
+
+SQL> create view myview as select * from tbl_practice where pdno=10;
+
+View created.
+
+SQL>  select * from myview;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         10
+
+SQL> update myview set psalary=1000 where psalary=6000;
+
+0 rows updated.
+
+SQL> update myview set psalary=1000 where psalary=9000;
+
+0 rows updated.
+
+SQL>  select * from myview;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         10
+
+SQL> update myview set psalary=1000 where pid=3;
+
+1 row updated.
+
+SQL>  select * from myview;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              1000         10
+         4 Mowni            2000         10
+
+SQL> update myview set psalary=9000 where pid=3;
+
+1 row updated.
+
+SQL>  select * from myview;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              9000         10
+         4 Mowni            2000         10
+
+SQL>  select * from tbl_practice;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         3 Agi              9000         10
+         4 Mowni            2000         10
+         5 Vasuki           3000         20
+         6 Vaish            4000         20
+         7 Dhivya           5000         30
+         7                  5000         30
+
+6 rows selected.
+
+SQL> delete myview pid=3;
+delete myview pid=3
+                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> delete from myview where pid=3;
+
+1 row deleted.
+
+SQL>  select * from myview;
+
+       PID PNAME         PSALARY       PDNO
+---------- ---------- ---------- ----------
+         4 Mowni            2000         10
+
+SQL> drop view myview;
+
+View dropped.
+
+SQL> select pid as "Patient Id", ename "Patient Name" from tbl_patient;
+select pid as "Patient Id", ename "Patient Name" from tbl_patient
+                                                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select pid as "Patient Id", ename "Patient Name" from tbl_practice;
+select pid as "Patient Id", ename "Patient Name" from tbl_practice
+                            *
+ERROR at line 1:
+ORA-00904: "ENAME": invalid identifier
+
+
+SQL> select pid as "Patient Id", pname "Patient Name" from tbl_practice;
+
+Patient Id Patient Na
+---------- ----------
+         4 Mowni
+         5 Vasuki
+         6 Vaish
+         7 Dhivya
+         7
+
+SQL> select pid  "Patient Id", pname "Patient Name" from tbl_practice;
+
+Patient Id Patient Na
+---------- ----------
+         4 Mowni
+         5 Vasuki
+         6 Vaish
+         7 Dhivya
+         7
+
+SQL> select pdno,count(*) as "Total No Of Patients" from tbl_practice group by pdno;
+
+      PDNO Total No Of Patients
+---------- --------------------
+        30                    2
+        20                    2
+        10                    1
+
+SQL>
+
+
+
+
+
+
+
+2)
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 8 14:51:20 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table tbl_student (reg_no number(5) primary key,stud_name varchar2(8) not null,stud_email varchar2(20) unique,stud_age number(3) check(stud_age>0),stud_location varchar2(8) default 'Salem');
+
+Table created.
+
+SQL> insert into tbl_student values (21001,'Adchaya','adchaya@gmail.com',20,'Erode');
+
+1 row created.
+
+SQL> select*from tbl_student;
+
+    REG_NO STUD_NAM STUD_EMAIL             STUD_AGE STUD_LOC
+---------- -------- -------------------- ---------- --------
+     21001 Adchaya  adchaya@gmail.com            20 Erode
+
+SQL> insert into tbl_student values (21001,'Adchaya','adchaya@gmail.com',-20,' ');
+insert into tbl_student values (21001,'Adchaya','adchaya@gmail.com',-20,' ')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C007003) violated
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values (003,'Agi','agi@gmail.com',21);
+
+1 row created.
+
+SQL> select*from tbl_student;
+
+    REG_NO STUD_NAM STUD_EMAIL             STUD_AGE STUD_LOC
+---------- -------- -------------------- ---------- --------
+     21001 Adchaya  adchaya@gmail.com            20 Erode
+         3 Agi      agi@gmail.com                21 Salem
+
+SQL> create table tbl_student (reg_no number(5) primary key,stud_name varchar2(8) not null,stud_email varchar2(20) unique,stud_age number(3) check(stud_age>0),stud_location varchar2(8) default 'Salem');
+create table tbl_student (reg_no number(5) primary key,stud_name varchar2(8) not null,stud_email varchar2(20) unique,stud_age number(3) check(stud_age>0),stud_location varchar2(8) default 'Salem')
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+3)
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 8 15:09:37 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table department(dno number(5) primary key,dname varchar2(20);
+create table department(dno number(5) primary key,dname varchar2(20)
+                                                                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table department(dno number(5) primary key,dname varchar2(20));
+
+Table created.
+
+SQL> create table employee(eid number(5) primary key,ename varchar2(10),esalary number(4),dno number(5),foreign key(dno) references department(dno));
+
+Table created.
+
+SQL> insert into employee values(101,'Agi',2000,10);
+insert into employee values(101,'Agi',2000,10)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007008) violated - parent key not
+found
+
+
+SQL> insert into department values(101,'Agi');
+
+1 row created.
+
+SQL> select * from department;
+
+       DNO DNAME
+---------- --------------------
+       101 Agi
+
+SQL> insert into employee values(101,'Agi',2000,10);
+insert into employee values(101,'Agi',2000,10)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007008) violated - parent key not
+found
+
+
+SQL> insert into employee values(101,'Agi',2000,20);
+insert into employee values(101,'Agi',2000,20)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007008) violated - parent key not
+found
+
+
+SQL> insert into employee values(101,'Agi',2000,101);
+
+1 row created.
+
+SQL>
+
+
