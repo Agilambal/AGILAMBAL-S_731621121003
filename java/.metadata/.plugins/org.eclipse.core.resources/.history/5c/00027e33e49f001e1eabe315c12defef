@@ -1,0 +1,29 @@
+package program;
+import java.util.Scanner;
+import java.lang.Math;
+public class Pattern1 {
+  public static void main(String[]args)
+  {
+	  int a,d,c;
+	  double sum;
+	 Scanner sc=new Scanner(System.in);
+	 System.out.println("Enter the number:");
+	 a=sc.nextInt();
+	 d=a;
+	 sum=0;
+	 while(d>0)
+	 {
+		 c=a%10;
+		 sum=(Math.pow(a, c));
+		 d=d/10;
+	 }
+	 if(a==sum)
+	 {
+		 System.out.println("equal");
+	 }
+	 else
+	 {
+		 System.out.println("Not equal");
+	 }
+  }
+}

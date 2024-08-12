@@ -1,0 +1,20 @@
+package com.agi;
+//Constructor overloading
+public class MyClass5 {
+	MyClass5(String name) {
+		System.out.println("Welcome "+name);
+	}
+	MyClass5(int a,int b) {
+		System.out.println("Sum :"+(a+b));
+	}
+	MyClass5(int n) {
+		System.out.println("Sum :"+(n+n));
+	}
+	public static void main(String args[]) {
+		MyClass5 obj1=new MyClass5("Agi");
+		MyClass5 obj2=new MyClass5(10,20);
+		MyClass5 obj3=new MyClass5(5);
+
+		
+	}
+}

@@ -1,0 +1,48 @@
+package com.agi;
+
+import java.util.Scanner;
+
+class Student{
+	int registrationNo;
+	String studentName;
+	int Mark[]=new int[5];
+	int sum;
+	int avg;
+	
+	//constructor
+	Student(int registrationNo,String studentName) {
+		this.registrationNo=registrationNo;
+		this.studentName=studentName;
+	}
+	void getMarks() {
+		Scanner s=new Scanner(System.in);
+		int n=s.nextInt();
+		for(int i=0;i<n;i++) {
+			Mark[i]=s.nextInt();
+		}
+	}
+	void calGrade() {
+		for(int i=0;i<5;i++) {
+			sum=sum+Mark[i];
+		}
+		avg=sum/5;
+		if(avg>=90) {
+			System.out.println("O grade");
+		}else if(avg>=50) {
+			System.out.println("A grade");
+		}else {
+			System.out.println("B grade");
+		}
+	}
+	void display() {
+		System.out.println("Name:"+studentName);
+		System.out.println("Register No:"+registrationNo);
+		System.out.println("Sum:"+sum);
+		System.out.println("Average:"+avg);
+	}
+}
+public class StudentGradeCal {
+	public static void main(String args[]) {
+		Student obj=new Student(003,"Agi");
+	}
+}

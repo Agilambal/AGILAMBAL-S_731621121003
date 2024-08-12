@@ -1,0 +1,12 @@
+package program;
+import java.util.Scanner;
+public class Pattern1 {
+  public static void main(String[]args)
+  {
+	  int a;
+	 Scanner sc=new Scanner(System.in);
+	 a=sc.nextInt();
+	 System.out.println("Enter the number"+a);
+	 
+  }
+}
